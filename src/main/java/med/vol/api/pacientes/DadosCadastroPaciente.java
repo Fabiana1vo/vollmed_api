@@ -29,4 +29,6 @@ public record DadosCadastroPaciente(
         DadosEndereco endereco
 
 ) {
+
+
 }

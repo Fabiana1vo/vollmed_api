@@ -1,9 +1,7 @@
 package med.vol.api.controller;
 
-import med.vol.api.pacientes.DadosCadastroPaciente;
-import med.vol.api.pacientes.DadosListagemPaciente;
-import med.vol.api.pacientes.PacienteRepository;
-import med.vol.api.pacientes.paciente;
+import jakarta.validation.Valid;
+import med.vol.api.pacientes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +21,7 @@ public class PacientesController {
     @PostMapping
     @Transactional
 
-    public void cadastrar(@RequestBody DadosCadastroPaciente dados ){
+    public void cadastrar(@RequestBody @Valid DadosCadastroPaciente dados ){
       repository.save(new paciente(dados));
     }
 
@@ -34,6 +32,13 @@ public class PacientesController {
         return repository.findAll(paginacao).map(DadosListagemPaciente :: new);
     }
 
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarPaciente dados){
+        var paciente = repository.getReferenceById(dados.id());
+
+        paciente.atualizarInformacoes(dados);
+    }
 
 
 }
