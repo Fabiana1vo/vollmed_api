@@ -1,7 +1,7 @@
-package med.vol.api.pacientes;
+package med.vol.api.domain.pacientes;
 import jakarta.persistence.*;
 import lombok.*;
-import med.vol.api.endereco.Endereco;
+import med.vol.api.domain.endereco.Endereco;
 
 @Table(name = "paciente")
 @Entity(name = "pacientes")
